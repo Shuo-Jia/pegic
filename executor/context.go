@@ -65,9 +65,14 @@ func NewContext(writer io.Writer, metaAddrs []string) *Context {
 		ValueEnc:   util.NewEncoder("utf8"),
 	}
 	ctx, _ := context.WithTimeout(context.Background(), time.Second*10)
-	c.Meta.ListApps(ctx, &admin.ListAppsRequest{
+	resp, err := c.Meta.ListApps(ctx, &admin.ListAppsRequest{
 		admin.AppStatus_AS_AVAILABLE,
 	})
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(resp)
+	}
 	return c
 }
 
