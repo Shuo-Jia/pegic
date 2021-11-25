@@ -20,9 +20,12 @@
 package executor
 
 import (
+	"context"
 	"fmt"
+	"github.com/XiaoMi/pegasus-go-client/idl/admin"
 	"io"
 	"pegic/executor/util"
+	"time"
 
 	"github.com/XiaoMi/pegasus-go-client/pegasus"
 	"github.com/XiaoMi/pegasus-go-client/session"
@@ -61,6 +64,10 @@ func NewContext(writer io.Writer, metaAddrs []string) *Context {
 		SortKeyEnc: util.NewEncoder("utf8"),
 		ValueEnc:   util.NewEncoder("utf8"),
 	}
+	ctx, _ := context.WithTimeout(context.Background(), time.Second*10)
+	c.Meta.ListApps(ctx, &admin.ListAppsRequest{
+		admin.AppStatus_AS_AVAILABLE,
+	})
 	return c
 }
 
