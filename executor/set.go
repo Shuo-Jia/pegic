@@ -30,11 +30,13 @@ func Set(rootCtx *Context, hashKeyStr, sortkeyStr, valueStr string) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println(pegasusArgs)
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	err = rootCtx.UseTable.Set(ctx, pegasusArgs[0], pegasusArgs[1], pegasusArgs[2])
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	fmt.Fprintln(rootCtx, "\nok")
