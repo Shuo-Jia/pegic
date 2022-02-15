@@ -22,7 +22,8 @@ package main
 import (
 	"fmt"
 	"os"
-	"pegic/shell"
+
+	"github.com/pegasus-kv/pegic/shell"
 
 	"github.com/XiaoMi/pegasus-go-client/pegalog"
 	"github.com/sirupsen/logrus"
